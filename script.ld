@@ -62,5 +62,8 @@ SECTIONS
         *(.bss)
         _BSS_END = .;
     } :data
+
+    /DISCARD/ : { *(.note.gnu.build-id) }
+    /DISCARD/ : { *(.ARM.attributes) }
 }
 
