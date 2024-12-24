@@ -1,8 +1,10 @@
 ASMFLAGS = -mcpu=cortex-a9
-LDFLAGS = -pie -nostartfiles -nostdlib -Wl,-T,./script.ld
+LDFLAGS = -fPIE -mcpu=cortex-a9 -nostartfiles -nostdlib -Wl,-T,./script.ld -fdata-sections
 
 ASMFILES = main.s
 OFILES = $(patsubst %.s,%.o,$(ASMFILES))
+
+all: executable.elf executable.bin
 
 %.o: %.s
 	$(CROSS_COMPILE)as $(ASMFLAGS) $< -o $@
@@ -10,13 +12,14 @@ OFILES = $(patsubst %.s,%.o,$(ASMFILES))
 executable.elf: $(OFILES)
 	$(CROSS_COMPILE)gcc $^ $(LDFLAGS) -o $@
 
-all: library.cpp main.cpp
-	# $@ evaluates to all
-	# $< evaluates to library.cpp
-	# $^ evaluates to library.cpp main.cpp
+executable.bin: executable.elf
+	$(CROSS_COMPILE)objcopy -O binary $^ $@
 
 build:
 	$(CROSS_COMPILE)as $(ASMFLAGS)
 
+disassemble: executable.elf
+	$(CROSS_COMPILE)objdump --disassemble-all executable.elf
+
 clean:
-	rm executable.elf $(OFILES)
+	rm executable.elf $(OFILES) executable.bin
