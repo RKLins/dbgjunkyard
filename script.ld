@@ -1,4 +1,3 @@
-OUTPUT_FORMAT(elf64-aarch64)
 ENTRY(start)
 
 PHDRS

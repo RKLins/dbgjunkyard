@@ -1,4 +1,4 @@
-ASMFLAGS = -mcpu=cortex-a9 --specs=nosys.specs
+ASMFLAGS = -mcpu=cortex-a9
 LDFLAGS = -pie -nostartfiles -nostdlib -Wl,-T,./script.ld
 
 ASMFILES = main.s
@@ -17,3 +17,6 @@ all: library.cpp main.cpp
 
 build:
 	$(CROSS_COMPILE)as $(ASMFLAGS)
+
+clean:
+	rm executable.elf $(OFILES)
