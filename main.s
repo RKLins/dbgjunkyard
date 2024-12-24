@@ -1,5 +1,5 @@
-.section .text.start
-.global .start
+.section .text
+.global start
 
 start:
 	b start
