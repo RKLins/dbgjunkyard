@@ -1,4 +1,4 @@
-ASMFLAGS = -mcpu=cortex-a9 -mthumb -march=armv7-a
+ASMFLAGS = -mcpu=cortex-a9 -mthumb -march=armv7-a -EL -k
 LDFLAGS = -fPIE -mcpu=cortex-a9 -nostartfiles -nostdlib -Wl,-T,./script.ld -fdata-sections
 
 ASMFILES = main.s
